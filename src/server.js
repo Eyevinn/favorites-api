@@ -6,7 +6,7 @@ fastify.use(cors());
 
 const fastifyRateLimit = require("fastify-rate-limit");
 fastify.register(fastifyRateLimit, {
-  max: 100,
+  max: 25,
   timeWindow: "1 minute"
 });
 
