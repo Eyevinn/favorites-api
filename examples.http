@@ -1,0 +1,22 @@
+### insert data
+
+POST http://localhost:3000/favorites/user1/asset123
+###
+POST http://localhost:3000/favorites/user1/asset234
+###
+POST http://localhost:3000/favorites/user1/asset345
+
+### successfull fetch
+
+GET http://localhost:3000/favorites/user1
+
+### unsuccessfull fetch
+
+GET http://localhost:3000/favorites/user2
+
+### DELETE data
+DELETE http://localhost:3000/favorites/user1/asset123
+###
+DELETE http://localhost:3000/favorites/user1/asset234
+###
+DELETE http://localhost:3000/favorites/user1/asset345
