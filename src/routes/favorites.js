@@ -1,11 +1,11 @@
-const positionRepository = require("../repositories/favoritesRepository");
+const favoritesRepository = require("../repositories/favoritesRepository");
 
 module.exports = (fastify, opts, next) => {
   fastify.post("/:userId/:assetId", async (req, res) => {
     const userId = req.params.userId;
     const assetId = req.params.assetId;
 
-    const store = await positionRepository.store(userId, assetId);
+    const store = await favoritesRepository.store(userId, assetId);
     res
       .header("Cache-Control", "public, no-cache")
       .code(200)
@@ -18,7 +18,7 @@ module.exports = (fastify, opts, next) => {
       return res.code(404).send();
     }
     let favorites = [];
-    favorites = await positionRepository.get(userId);
+    favorites = await favoritesRepository.get(userId);
     res
       .header("Cache-Control", "public, no-cache")
       .code(200)
@@ -28,7 +28,7 @@ module.exports = (fastify, opts, next) => {
   fastify.delete("/:userId/:assetId", async (req, res) => {
     const userId = req.params.userId;
     const assetId = req.params.assetId;
-    const deleted = await positionRepository.del(userId, assetId);
+    const deleted = await favoritesRepository.del(userId, assetId);
     if (!userId || !assetId || !deleted) {
       return res.code(404).send();
     }
