@@ -1,12 +1,14 @@
 const redisClient = require("./helpers/redisClient");
 
-const KEY_ASSET = (userId, assetId) => `favorites:${userId}:${assetId}`;
-const KEY_USER = userId => `*${userId}*`;
+const KEY_PREFIX = "favorites";
+const KEY_USER = userId => `*${KEY_PREFIX}:${userId}*`;
+const generateKey = (...args) => args.join(":");
 const ONE_YEAR = 1 * 60 * 60 * 24 * 365;
 
 const store = async (userId, assetId) => {
   if (!userId || !assetId) return false;
-  const success = redisClient.setex(KEY_ASSET(userId, assetId), ONE_YEAR, 1);
+  const key = generateKey(KEY_PREFIX, userId, assetId);
+  const success = redisClient.setex(key, ONE_YEAR, 1);
   return success;
 };
 
@@ -35,7 +37,8 @@ const getInclExpiration = async key => {
 
 const del = async (userId, assetId) => {
   if (!userId || !assetId) return false;
-  await redisClient.del(KEY_ASSET(userId, assetId));
+  const key = generateKey(KEY_PREFIX, userId, assetId);
+  await redisClient.del(key);
   return true;
 };
 
