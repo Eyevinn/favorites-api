@@ -1,4 +1,4 @@
-const favoritesRepository = require("../repositories/favoritesRepository");
+const favoritesRepository = require("./favoritesRepository");
 
 module.exports = (fastify, opts, next) => {
   fastify.post("/:userId/:assetId", async (req, res) => {

@@ -10,7 +10,7 @@ fastify.register(fastifyRateLimit, {
   timeWindow: "1 minute"
 });
 
-fastify.register(require("./routes/favorites"), {
+fastify.register(require("./routes"), {
   prefix: "/favorites"
 });
 

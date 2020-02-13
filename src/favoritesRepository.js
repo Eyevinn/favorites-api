@@ -1,4 +1,4 @@
-const redisClient = require("../helpers/redisClient");
+const redisClient = require("./helpers/redisClient");
 
 const KEY_ASSET = (userId, assetId) => `favorites:${userId}:${assetId}`;
 const KEY_USER = userId => `*${userId}*`;
